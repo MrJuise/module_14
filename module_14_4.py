@@ -36,6 +36,7 @@ kb_prod.row(button_prod, button_prod_2, button_prod_3, button_prod_4)
 async def start(message):
     await message.answer(f"Привет {message.from_user.username}, я бот помогающий твоему здоровью.", reply_markup=kb)
 
+crud_functions.initiate_db()
 
 @dp.message_handler(text="Купить")
 async def get_Buying_list(message):

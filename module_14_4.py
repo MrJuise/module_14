@@ -40,15 +40,15 @@ async def start(message):
 @dp.message_handler(text="Купить")
 async def get_Buying_list(message):
     prod = crud_functions.get_all_products()
-    with open('img/1.jpg', 'rb') as img:
-        await message.answer_photo(img, f"Продукт: {prod[0][1]} \nОписание: {prod[0][2]} \nЦена: {prod[0][3]}")
-    with open('img/2.jpg', 'rb') as img:
-        await message.answer_photo(img, f"Продукт: {prod[1][1]} \nОписание: {prod[1][2]} \nЦена: {prod[1][3]}")
-    with open('img/3.jpg', 'rb') as img:
-        await message.answer_photo(img, f"Продукт: {prod[2][1]} \nОписание: {prod[2][2]} \nЦена: {prod[2][3]}")
-    with open('img/4.jpeg', 'rb') as img:
-        await message.answer_photo(img, f"Продукт: {prod[3][1]} \nОписание: {prod[3][2]} \nЦена: {prod[3][3]}")
+    images = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpeg']
+    for i in range(min(len(prod), len(images))):
+        with open(images[i], 'rb') as img:
+            await message.answer_photo(
+                img,
+                f"Продукт: {prod[i][1]} \nОписание: {prod[i][2]} \nЦена: {prod[i][3]}"
+            )
     await message.answer("Выберите продукт для покупки:", reply_markup=kb_prod)
+
 
 
 @dp.callback_query_handler(text="product_buying")
